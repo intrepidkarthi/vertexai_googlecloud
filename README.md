@@ -1,8 +1,12 @@
 # Building and Deploying a Google Cloud Vertex AI Application with Node.js and Cloud Run
-Build a simple vertex ai application, build docker container, deploy in google cloud using cloudrun
+
 
 ## Objective
 In this tutorial, we'll walk you through the process of building a Node.js application that leverages Google Cloud Vertex AI for machine learning capabilities. Additionally, we'll containerize the application using Docker and deploy it on Google Cloud Run. This end-to-end guide will help you harness the power of Vertex AI in a scalable and serverless environment.
+
+### Screenshot
+![Alt text](/images/screenshot.png?raw=true "Application Screenshot")
+
 
 ### Prerequisites
 Before we begin, ensure you have the following prerequisites in place:
@@ -64,9 +68,9 @@ Run the application. Here are the steps:
 
 Install the required Node.js libraries for working with Vertex AI.
 
-npm install @google-cloud/vertex-ai express body-parser
+`npm install @google-cloud/vertex-ai express body-parser`
 
-Run the commant "node app.js" from the commandline
+Run the commant `node app.js` from the commandline
 
 Make sure the application is running without any issue on local machine.
 
@@ -84,6 +88,7 @@ Ensure that your application has a package.json file defining its dependencies. 
 **Step 3: Create a Dockerfile:**
 Create a file named Dockerfile in the root directory of your Node.js application. This file will contain instructions for building your Docker image.
 
+`
 FROM node:18
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -91,22 +96,24 @@ RUN npm install
 COPY . .
 EXPOSE 8080
 CMD ["node", "app.js" ]
+`
 
 **Step 4: Build the Docker Image:**
 Open a terminal/command prompt in the same directory as your Dockerfile and run the following command to build the Docker image:
 
-docker build -t my-nodejs-app .
+`docker build -t my-nodejs-app .`
 
 since, I am using macbook, I am adding additional parameters to run on google cloud later.
 
-docker buildx build --platform linux/amd64 -t my-nodejs-app .
+`docker buildx build --platform linux/amd64 -t my-nodejs-app .`
 
 Replace my-nodejs-app with a suitable name for your Docker image. The . at the end specifies the build context (the current directory).
 
 **Step 5: Run the Docker Container:**
 After successfully building the Docker image, you can run a container from it using the following command:
 
-docker run -p 3000:3000 -d my-nodejs-app
+`docker run -p 3000:3000 -d my-nodejs-app`
+
 This command maps port 3000 from your host machine to port 3000 inside the container, assuming your Node.js application listens on port 3000.
 
 **Step 6: Access Your Application:**
@@ -132,8 +139,8 @@ Google Cloud Run is a serverless platform for running containerized applications
 
 Ensure that you have a Docker container image prepared and pushed to a container registry, such as Google Container Registry (GCR) or Docker Hub. Your container image should contain the application you want to run.
 
- docker tag ai2 gcr.io/<google project id>/my-nodejs-app
- docker push gcr.io/<google project id>/my-nodejs-app
+ `docker tag ai2 gcr.io/<google project id>/my-nodejs-app`
+ `docker push gcr.io/<google project id>/my-nodejs-app`
 
 
 **Step 2: Enable Google Cloud Run API:**
@@ -152,10 +159,10 @@ Click the "Create Service" button to create a new Cloud Run service.
 
 Service Configuration:
 
-Deployment Platform: Choose "Fully managed" for the fully managed environment.
-Container Image: Enter the URL of your container image in the format gcr.io/my-project/my-image:latest or browse for it if it's in your Google Container Registry.
-Service Name: Provide a name for your service.
-Region: Select the region where you want to deploy your service.
+* Deployment Platform: Choose "Fully managed" for the fully managed environment.
+* Container Image: Enter the URL of your container image in the format gcr.io/my-project/ my-image:latest or browse for it if it's in your Google Container Registry.
+* Service Name: Provide a name for your service.
+* Region: Select the region where you want to deploy your service.
 Authentication:
 
 Choose whether you want to allow unauthenticated access (public access) or require authentication.
@@ -174,6 +181,8 @@ The deployment process may take a few minutes. You can monitor the progress on t
 **Step 8: Access Your Cloud Run Service:**
 
 Once the deployment is complete, you will see a URL listed for your service on the Cloud Run dashboard. You can access your application by opening this URL in a web browser.
+
+`https://ai3-ygw5l5uvpq-uc.a.run.app`
 
 **Step 9: Manage and Monitor Your Service:**
 
