@@ -4,6 +4,9 @@
 ## Objective
 In this tutorial, we'll walk you through the process of building a Node.js application that leverages Google Cloud Vertex AI for machine learning capabilities. Additionally, we'll containerize the application using Docker and deploy it on Google Cloud Run. This end-to-end guide will help you harness the power of Vertex AI in a scalable and serverless environment.
 
+## Presentation Link
+https://docs.google.com/presentation/d/1W4R21LHziWI8fz-UpO7QEYpwb3MmL8KXHQyHDZQUNdc/edit#slide=id.g281f57695c8_0_3
+
 ### Screenshot
 ![Alt text](/images/screenshot.png?raw=true "Application Screenshot")
 
